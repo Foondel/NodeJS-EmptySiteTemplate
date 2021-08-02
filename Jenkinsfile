@@ -24,5 +24,31 @@ pipeline {
       }
     }
 
+    stage('Test the app') {
+      steps {
+        sh 'curl localhost:8080'
+      }
+    }
+
+    stage('kill the app') {
+      steps {
+        sh 'pkill -f node'
+      }
+    }
+
+    stage('archive the app') {
+      steps {
+        sh 'zip -r '
+        archiveArtifacts 'artifact.zip'
+        cleanWs(cleanWhenSuccess: true)
+      }
+    }
+
+    stage('slack') {
+      steps {
+        slackSend(channel: 'a')
+      }
+    }
+
   }
 }
