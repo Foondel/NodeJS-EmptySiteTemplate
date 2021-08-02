@@ -20,7 +20,7 @@ pipeline {
 
     stage('running the app') {
       steps {
-        sh 'npm start'
+        sh 'npm start &'
       }
     }
 
@@ -36,10 +36,10 @@ pipeline {
       }
     }
 
-    stage('archive the app') {
+    stage('Package') {
       steps {
-        sh 'zip -r '
-        archiveArtifacts 'artifact.zip'
+        sh 'zip -r package.zip'
+        archiveArtifacts 'package.zip'
         cleanWs(cleanWhenSuccess: true)
       }
     }
