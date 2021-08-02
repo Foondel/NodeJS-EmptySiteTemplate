@@ -18,5 +18,11 @@ pipeline {
       }
     }
 
+    stage('running the app') {
+      steps {
+        sh 'npm start'
+      }
+    }
+
   }
 }
