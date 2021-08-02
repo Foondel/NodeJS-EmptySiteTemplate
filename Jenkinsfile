@@ -32,13 +32,13 @@ pipeline {
 
     stage('kill the app') {
       steps {
-        sh 'pkill -f node'
+        sh 'sudo pkill -f node'
       }
     }
 
     stage('Package') {
       steps {
-        sh 'zip -r package.zip'
+        sh 'zip -r package.zip .'
         archiveArtifacts 'package.zip'
         cleanWs(cleanWhenSuccess: true)
       }
